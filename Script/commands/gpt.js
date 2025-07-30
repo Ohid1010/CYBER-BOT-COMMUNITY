@@ -8,7 +8,7 @@
       {
         "type": "input",
         "input_type": "text",
-        "text": "👾 আমি Ohid 🤖 — রোমান্টিক মুড অন!\nকি জানতে চাও বলো?",
+        "text": "🤖 আমি Ohid — তোমার AI Hacker! কী জানতে চাও বলো?",
         "variable_name": "user_question"
       },
       {
@@ -16,45 +16,51 @@
         "conditions": [
           {
             "condition": "contains",
-            "value": "ohid",
-            "source": "user_question"
+            "source": "user_question",
+            "value": "ohid"
           },
           {
             "condition": "contains",
-            "value": "ai",
-            "source": "user_question"
+            "source": "user_question",
+            "value": "ai"
           },
           {
             "condition": "contains",
-            "value": "hacker",
-            "source": "user_question"
+            "source": "user_question",
+            "value": "hacker"
           },
           {
             "condition": "contains",
-            "value": "tui ke",
-            "source": "user_question"
+            "source": "user_question",
+            "value": "tui ke"
           }
         ],
         "true_output": 1,
         "false_output": 2
       },
-      {
-        "type": "text",
-"text": "🔐 আমি Ohid — তোমার AI assistant 🤖\nএনক্রিপ্টেড জ্ঞান খুলে দিতে প্রস্তুত!"
+      {"type": "text",
+        "text": "🔐 আমি Ohid — তোমার AI Hacker 🤖\nএনক্রিপ্টেড তথ্য জানাতে প্রস্তুত!"
       },
       {
- curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent" \
-  -H 'Content-Type: application/json' \
-  -H 'X-goog-api-key: AIzaSyCBGBrCrr4z2WMMZdo2BGuzjjQSSAkn08g' \
-  -X POST \
-  -d '{
-    "contents": [
-      {
-        "parts": [
-          {
-            "text": "Explain how AI works in a few words"
+        "type": "action",
+        "action": {
+          "type": "external_request",
+          "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyCMd8bV16YtSeou02bW0xmA1rXmdkR5upI",
+          "method": "POST",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": "{\"contents\":[{\"parts\":[{\"text\":\"{{user_question}}\"}]}]}",
+          "body_type": "raw",
+          "response_mapping": {
+            "gemini_reply": "candidates[0].content.parts[0].text"
           }
-        ]
+        }
+      },
+      {
+        "type": "text",
+        "text": "🧠 AI Hacker Ohid বলছে:gemini_reply}"
       }
     ]
-  }'
+  }
+}
