@@ -7,38 +7,60 @@
     "messages": [
       {
         "type": "input",
-        "input_type": "AI",
-        "Hacker": "😈 আমি Ohid! বলো দেখি, কী জানতে চাও? আমি কিন্তু একটু দুষ্টু! 🤭",
+        "input_type": "text",
+        "text": "👾 আমি Ohid 🤖 — রোমান্টিক মুড অন!\nকি জানতে চাও বলো?",
         "variable_name": "user_question"
+      },
+      {
+        "type": "condition",
+        "conditions": [
+          {
+            "condition": "contains",
+            "value": "ohid",
+            "source": "user_question"
+          },
+          {
+            "condition": "contains",
+            "value": "ai",
+            "source": "user_question"
+          },
+          {
+            "condition": "contains",
+            "value": "hacker",
+            "source": "user_question"
+          },
+          {
+            "condition": "contains",
+            "value": "tui ke",
+            "source": "user_question"
+          }
+        ],
+        "true_output": 1,
+        "false_output": 2
+      },
+      {
+        "type": "text",
+"text": "🔐 আমি Ohid — তোমার AI assistant 🤖\nএনক্রিপ্টেড জ্ঞান খুলে দিতে প্রস্তুত!"
       },
       {
         "type": "action",
         "action": {
           "type": "external_request",
-          "url": "https://api.openai.com/v1/chat/completions",
+          "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_GEMINI_API_KEY",
           "method": "POST",
           "headers": {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer YOUR_OPENAI_API_KEY"
+            "Content-Type": "application/json"
           },
-          "body": "{\"model\":\"gpt-3.5-turbo\",\"messages\":[{\"role\":\"system\",\"content\":\"তুমি একজন দুষ্টু, মজার এবং বাংলাভাষী AI যাদের নাম Ohid। তুমি সব সময় হালকা রসিকতা করে রিপ্লাই দাও।\"},{\"role\":\"user\",\"content\":\"{{user_question}}\"}]}",
+          "body": "{\"contents\":[{\"parts\":[{\"text\":\"{{user_question}}\"}]}]}",
           "body_type": "raw",
           "response_mapping": {
-            "gpt_reply": "choices[0].message.content"
+            "gemini_reply": "candidates[0].content.parts[0].text"
           }
         }
       },
       {
         "type": "text",
-        "text": "👻 বুদ্ধিদীপ্ত উত্তর:gpt_reply}"
-      },
-      {
-        "type": "image", 
-"url": "https://media.giphy.com/media/l41lI4bYmcsPJX9Go/giphy.gif"
-      },
-      {
-        "type": "audio",
-        "url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        "text": "💻 AI Boss Ohid বলছে:gemini_reply}"
       }
     ]
   }
