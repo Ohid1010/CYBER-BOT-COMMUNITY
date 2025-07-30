@@ -1,41 +1,45 @@
-const axios = require('axios');
-
-module.exports.config = {
- name: "gpt",
- version: "1.0",
- hasPermission: 0,
- credits: "Islamick Chat",
- usePrefix: false,
- description: "M H BD AI",
- commandCategory: "General",
- cooldowns: 2,
-};
-
-const API_SERVER_URL = 'https://sensui-useless-apis.codersensui.repl.co/api/tools/ai';
-
-module.exports.run = async ({ api, event, args }) => {
- try {
- const question = args.join(' ');
-
- if (!question) {
- return api.sendMessage("আপনার প্রশ্ন টি gpt লিখে অ্যাড করুন: 📝", event.threadID);
- }
-
- const response = await axios.get(`${API_SERVER_URL}?question=${encodeURIComponent(question)}`);
-
- if (response.data.error) {
- return api.sendMessage("Oops! The AI encountered an error. Please try again later.", event.threadID);
- }
-
- const answer = response.data.answer;
-
- if (answer) {
- api.sendMessage(`${global.config.BOTNAME}\n𝐓𝐡𝐢𝐬 𝐢𝐬 𝐦𝐲 𝐀𝐧𝐬𝐰𝐞𝐫🙆‍♂️😌\n\n${answer}`, event.threadID);
- } else {
- api.sendMessage("There's something wrong. Please try again...", event.threadID);
- }
- } catch (error) {
- console.error('Error fetching response:', error);
- api.sendMessage("Error fetching response.", event.threadID);
- }
-};
+{
+  "version": "v2",
+  "metadata": {
+    "platform": "facebook"
+  },
+  "content": {
+    "messages": [
+      {
+        "type": "input",
+        "input_type": "AI",
+        "Hacker": "😈 আমি Ohid! বলো দেখি, কী জানতে চাও? আমি কিন্তু একটু দুষ্টু! 🤭",
+        "variable_name": "user_question"
+      },
+      {
+        "type": "action",
+        "action": {
+          "type": "external_request",
+          "url": "https://api.openai.com/v1/chat/completions",
+          "method": "POST",
+          "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer YOUR_OPENAI_API_KEY"
+          },
+          "body": "{\"model\":\"gpt-3.5-turbo\",\"messages\":[{\"role\":\"system\",\"content\":\"তুমি একজন দুষ্টু, মজার এবং বাংলাভাষী AI যাদের নাম Ohid। তুমি সব সময় হালকা রসিকতা করে রিপ্লাই দাও।\"},{\"role\":\"user\",\"content\":\"{{user_question}}\"}]}",
+          "body_type": "raw",
+          "response_mapping": {
+            "gpt_reply": "choices[0].message.content"
+          }
+        }
+      },
+      {
+        "type": "text",
+        "text": "👻 বুদ্ধিদীপ্ত উত্তর:gpt_reply}"
+      },
+      {
+        "type": "image", 
+"url": "https://media.giphy.com/media/l41lI4bYmcsPJX9Go/giphy.gif"
+      },
+      {
+        "type": "audio",
+        "url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+      }
+    ]
+  }
+}
