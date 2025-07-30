@@ -43,25 +43,18 @@
 "text": "🔐 আমি Ohid — তোমার AI assistant 🤖\nএনক্রিপ্টেড জ্ঞান খুলে দিতে প্রস্তুত!"
       },
       {
-        "type": "action",
-        "action": {
-          "type": "external_request",
-          "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyCBGBrCrr4z2WMMZdo2BGuzjjQSSAkn08g",
-          "method": "POST",
-          "headers": {
-            "Content-Type": "application/json"
-          },
-          "body": "{\"contents\":[{\"parts\":[{\"text\":\"{{user_question}}\"}]}]}",
-          "body_type": "raw",
-          "response_mapping": {
-            "gemini_reply": "candidates[0].content.parts[0].text"
-          }
-        }
-      },
+ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent" \
+  -H 'Content-Type: application/json' \
+  -H 'X-goog-api-key: AIzaSyCBGBrCrr4z2WMMZdo2BGuzjjQSSAkn08g' \
+  -X POST \
+  -d '{
+    "contents": [
       {
-        "type": "text",
-        "text": "💻 AI Boss Ohid বলছে:gemini_reply}"
+        "parts": [
+          {
+            "text": "Explain how AI works in a few words"
+          }
+        ]
       }
     ]
-  }
-}
+  }'
