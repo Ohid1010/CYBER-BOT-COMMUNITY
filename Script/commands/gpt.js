@@ -46,7 +46,7 @@
         "type": "action",
         "action": {
           "type": "external_request",
-          "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyCMd8bV16YtSeou02bW0xmA1rXmdkR5upI",
+          "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyCBGBrCrr4z2WMMZdo2BGuzjjQSSAkn08g",
           "method": "POST",
           "headers": {
             "Content-Type": "application/json"
